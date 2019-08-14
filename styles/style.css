@@ -1,26 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans');
-
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
-
-html {
-  font-family: sans-serif;
-  line-height: 1;
-}
-
-body {
+body { /* This is overwrites custom-reset-2019.css */
   height: 100vh;
-  margin: 0;
-  font-size: 16px;
-  font-weight: 400;
-  font-family: "Open Sans", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-  line-height: 1;
-  color: #333;
-  text-align: left;
-  background-color: white;
 }
 
 
@@ -49,10 +28,6 @@ main::after {
   background: linear-gradient(-45deg, #23d5ab, #23a6d5, #e73c7e, #ee7752);
   z-index: 1;
 }
-
-/* I've stripped this example down as much as possible.
-However, there still seems to be some glitchy behavior when this is rendered
-in the IOS Safari browser. */
 
 main.animate::after {
   animation:         gradient_background 15s linear 0s infinite;
