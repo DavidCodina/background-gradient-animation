@@ -1,5 +1,48 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:900&display=swap');
+
 body { /* This is overwrites custom-reset-2019.css */
   height: 100vh;
+}
+
+.article {
+  position: relative; /* Specifically for the z-index */
+  min-height: 650px;
+  width: 75%;
+  margin: 0 auto;
+  padding: 1.5rem;
+  background-color: rgba(255,255,255,0.25);
+  border: 2px solid rgba(0,0,0,0.35);
+  border-radius: 1.5rem;
+  box-shadow: -5px 5px 5px rgba(0,0,0,0.25),
+               5px 5px 5px rgba(0,0,0,0.25);
+  overflow-x:scroll;
+  z-index: 1;
+}
+
+.fancy-h1 {
+  margin: 0;
+  padding: 0;
+  color: snow;
+  text-align: center;
+  font-size: 5vw;
+  font-family: Montserrat;
+  letter-spacing: 3px;
+  line-height: 1.5;
+  -webkit-text-stroke-width: 1.5px;
+  -webkit-text-stroke-color: #61DAFB;
+  text-shadow: -5px 5px 5px rgba(0,0,0,0.35);
+}
+
+
+.fancy-h2 {
+  color: snow;
+  font-size: 4vw;
+  font-family: Montserrat;
+  letter-spacing: 1px;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: violet;
+  text-shadow: -2px 2px 4px rgba(0,0,0,0.15);
+  white-space: nowrap;
 }
 
 
@@ -14,6 +57,7 @@ main {
   left: 0;
   min-height: 100%;
   width: 100%;
+  padding: 150px 0 100px 0;
   overflow: hidden;
 }
 
@@ -26,7 +70,7 @@ main::after {
   width: 400%;
   content: '';
   background: linear-gradient(-45deg, #23d5ab, #23a6d5, #e73c7e, #ee7752);
-  z-index: 1;
+  /* z-index: 1; */
 }
 
 main.animate::after {
