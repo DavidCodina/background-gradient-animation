@@ -5,17 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>Background Gradient Demo</title>
-  <!-- <link href="styles/custom-reset-2019.css" rel="stylesheet"> -->
   <link href="styles/style.css" rel="stylesheet">
 </head>
 
 
 <body>
-  <main>
-    <div class="background animate"></div>
-    <article class="article">
-      <h2 class="fancy-h2">Background Gradient Demo:</h2>
-    </article>
+  <main class="animate">
   </main>
 
 
@@ -26,9 +21,9 @@
 
   <script>
     window.onresize = function(){
-      const background = document.getElementsByClassName("background")[0];
-      background.classList.remove("animate");
-      setTimeout(() => { background.classList.add("animate"); }, 1000);
+      const main = document.getElementsByTagName("MAIN")[0];
+      main.classList.remove("animate");
+      setTimeout(() => { main.classList.add("animate"); }, 1000);
     }
   </script>
 </body>
