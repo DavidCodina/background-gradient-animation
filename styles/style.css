@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: sans-serif;
+  line-height: 1;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Open Sans", "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  line-height: 1;
+  color: #333;
+  text-align: left;
+  background-color: white;
+}
+
+article, aside, dialog, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+
+/* =============================================================================
+                                  main
+============================================================================= */
+
+
+/* The background gradient is applied to main::after and NOT body::after because
+we have to also use overflow: hidden; */
+main {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  padding: 150px 0 100px 0;
+  overflow: hidden;
+}
+
+.article {
+  position: relative; /* Specifically for the z-index */
+  min-height: 650px;
+  width: 75%;
+  margin: 0 auto;
+  background-color: white;
+  background-color: rgba(255,255,255,0.25);
+  border: 2px solid rgba(0,0,0,0.35);
+
+  border-radius: 1.5rem;
+  box-shadow: -5px 5px 5px rgba(0,0,0,0.25),
+               5px 5px 5px rgba(0,0,0,0.25);
+  z-index: 1;
+  overflow-x:scroll;
+}
+
+
+/* =============================================================================
+                       CPU Issues with the animation
+================================================================================
+
+
+The original example was animating background-position:
+
+          https://codepen.io/P1N2O/pen/pyBNzX
+
+
+The problem with this is that animating background-position causes repaints.
+And that ends up being a nightmare on the CPU.
+The end result was that it made the sticky navigation glitch out,
+which is somewhat misleading because that's not really where the problem was
+originating from.
+
+This was not solved by using good old GPU hacks on .fixed-header:
+
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+
+
+Nor was it solved by using these on the element with the background gradient (originally main):
+
+    transform: translate3d(0, 0, 0);
+    will-change: background-position;
+
+
+There are a lot of articles suggesting these approaches:
+
+    https://github.com/twbs/bootstrap/issues/18832
+    https://www.youtube.com/watch?v=2vFrZXWiwIc
+    https://stackoverflow.com/questions/13176746/css-keyframe-animation-cpu-usage-is-high-should-it-be-this-way
+    http://ariya.blogspot.com/2011/07/fluid-animation-with-accelerated.html
+    https://www.smashingmagazine.com/2016/12/gpu-animation-doing-it-right/
+    https://dev.opera.com/articles/css-will-change-property/
+    https://css-tricks.com/forums/topic/animated-background-eating-up-cpu/
+    https://coderwall.com/p/ka0low/don-t-mix-position-fixed-with-css-transforms
+    https://developer.microsoft.com/en-us/microsoft-edge/platform/issues/12699983/
+    https://webdesign.tutsplus.com/tutorials/css3-animations-the-hiccups-and-bugs-youll-want-to-avoid--webdesign-4867
+
+
+In the end, the solution was to use transform instead, and this is the best article I found:
+
+    https://www.html5rocks.com/en/tutorials/speed/high-performance-animations/
+    "Transforms are the best properties to animate because the GPU can assist with the heavy lifting."
+
+
+================================================================================
+
+============================================================================= */
+
+
+.background {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 400%;
+  width: 400%;
+  background: linear-gradient(-45deg, #23d5ab, #23a6d5, #e73c7e, #ee7752);
+}
+
+.background.animate {
+  animation:         gradient_background 15s linear 0s infinite;
+  -webkit-animation: gradient_background 15s linear 0s infinite;
+}
+
+/* ============================
+    animation keyframes
+============================ */
+
+
+@keyframes gradient_background  {
+  /* https://css-tricks.com/debugging-css-keyframe-animations/ */
+  50% { transform: translate(-75%, -75%) }
+}
+
+/* https://www.quackit.com/css/properties/webkit/css_-webkit-transform.cfm */
+@-webkit-keyframes gradient_background  {
+  50%  { -webkit-transform: translate(-75%, -75%); }
+}
