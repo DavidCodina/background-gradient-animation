@@ -19,6 +19,24 @@ body { /* This is overwrites custom-reset-2019.css */
   z-index: 1;
 }
 
+.article p {
+  color: white;
+  font-size: 20px;
+  text-shadow: -2px 2px 2px rgba(0,0,0,0.25);
+}
+
+.article p code {
+  text-shadow: none;
+}
+
+pre {
+  box-shadow: -3px 3px 3px rgba(0,0,0,0.15);
+}
+
+code:not(pre code) {
+  box-shadow: -3px 3px 3px rgba(0,0,0,0.15);
+}
+
 .fancy-h1 {
   margin: 0;
   padding: 0;
@@ -32,7 +50,6 @@ body { /* This is overwrites custom-reset-2019.css */
   -webkit-text-stroke-color: #61DAFB;
   text-shadow: -5px 5px 5px rgba(0,0,0,0.35);
 }
-
 
 .fancy-h2 {
   color: snow;

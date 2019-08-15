@@ -14,6 +14,32 @@
   <main class="animate">
     <article class="article">
       <h2 class="fancy-h2">About this Demo:</h2>
+
+      <p>This feature is best used in contexts where one is sure that the content
+      will not dynamically change the <code>scrollHeight</code> (e.g., through some programmatic update,
+      or user interaction). In general, it's fine for the content to change, so long as it doesn't
+      add to or subtract from <code>scrollHeight</code>.</p>
+
+
+      <p>In such cases, the gradient animation is blind to these changes, and will not itself
+      update. This causes the animation to break.</p>
+
+
+      <p>In cases where it's 'safe' to use this animation, one must still reset it on resizing
+      of the window because resizing of the window inevitably leads to the shortening or
+      lengthening of content vertically.</p>
+
+      <pre><code>
+  window.onresize = function(){
+    const main = document.getElementsByTagName("MAIN")[0];
+    main.classList.remove("animate");
+    setTimeout(() => { main.classList.add("animate"); }, 1000);
+  }
+      </code></pre>
+
+      <p>Note also that the animation is made with <code>transform: translate()</code> and
+      <em>not</em> the <code>background-position</code> property. This is to ensure optimization and avoid
+      overloading the CPU.</p>
     </article>
   </main>
 
